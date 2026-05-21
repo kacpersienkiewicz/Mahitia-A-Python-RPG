@@ -7,3 +7,4 @@ class Apparel:
 
 
 rags = Apparel(0, "Torso", "Fabric", 0)
+leather_armor = Apparel(2, "Torso", "Leather", 10)
