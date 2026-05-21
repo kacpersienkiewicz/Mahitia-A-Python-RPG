@@ -4,3 +4,6 @@ class Apparel:
         self.apparel_type = apparel_type
         self.material = material
         self.value = value
+
+
+rags = Apparel(0, "Torso", "Fabric", 0)
