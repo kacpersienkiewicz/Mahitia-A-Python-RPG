@@ -1,8 +1,8 @@
 class Weapon:
-    def __init__(self, name, damage, weapon_type, material, value):
+    def __init__(self, name, damage, damage_type, material, value):
         self.name = name
         self.damage = damage
-        self.weapon_type = weapon_type
+        self.damage_type = damage_type
         self.material = material
         self.value = value
 
@@ -12,14 +12,12 @@ class Weapon:
         else:
             return f"{self.name} is a(n) {self.material} {self.weapon_type} weapon which does {self.damage} damage, and is worth {self.value} coins."
 
-    def attack(self, target) -> None:
-        target.health -= (self.damage - target.armor)
 
 
-fists = Weapon("Fists", 1, "Unarmed", None, 0)
-claws = Weapon("Claws", 2, "Unarmed", None, 0)
-stone_sword = Weapon("Stone Sword", 2, "Blade", "Stone", 5)
-copper_sword = Weapon("Copper Sword", 3, "Blade", "Copper", 10)
-bronze_sword = Weapon("Bronze Sword", 4, "Blade", "Bronze", 20)
-iron_sword = Weapon("Iron Sword", 5, "Blade", "Iron", 30)
-steel_sword = Weapon("Steel Sword", 6, "Blade", "Steel", 40)
+fists = Weapon("Fists", 1, "Bludgeoning", None, 0)
+claws = Weapon("Claws", 2, "Slashing", None, 0)
+stone_sword = Weapon("Stone Sword", 2, "Slashing", "Stone", 5)
+copper_sword = Weapon("Copper Sword", 3, "Slashing", "Copper", 10)
+bronze_sword = Weapon("Bronze Sword", 4, "Slashing", "Bronze", 20)
+iron_sword = Weapon("Iron Sword", 5, "Slashing", "Iron", 30)
+steel_sword = Weapon("Steel Sword", 6, "Slashing", "Steel", 40)
