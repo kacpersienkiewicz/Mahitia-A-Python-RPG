@@ -1,16 +1,20 @@
-from weapons import fists
-from apparel import rags
+import weapons
+import apparel
 
 class Character:
-    def __init__(self, name: str, level: int, xp: int, coins: int):
+    def __init__(self, name: str, level: int, xp: int, coins: int, health: int, health_mult: int, weapon, apparel):
         self.name = name
-        self.character_class = "Commoner"
         self.level = level
         self.xp = xp
         self.coins = coins
-        self.weapon = fists
-        self.apparel = rags
-        self.armor = rags.armor
+        self.health_mult = health_mult
+        self.health = health + self.level * self.health_mult
+        self.max_health = self.health
+        self.character_class = "Commoner"
+        self.weapon = weapon
+        self.damage = weapon.damage
+        self.apparel = apparel
+        self.armor = apparel.armor
 
     def __str__(self):
         return f"{self.name} is a level {self.level} {self.character_class}."
@@ -24,19 +28,54 @@ class Character:
         self.armor = apparel.armor
 
     def attack(self, target):
-        target,health -= (self.damage - target.armor)
+        damage = self.damage - target.armor
+        if damage < 0:
+            damage = 0
+        target.health -= damage
+        print(f"{self.name} attacks {target.name} for {damage} damage, who now has {target.health} health left.")
 
-class Enemy(Character):
-    def __init__(self, name, level, xp, coins):
-        super().__init__(name, level, xp, coins)
-        self.character_class = "Enemy"
-        self.health_mult = 0
-        self.health = 10 + self.level * self.health_mult
-        self.max_health = self.health
-    
-    def look_at_enemy(self):
-        print(f"You see a {self.name}, dressed in {self.apparel}, wielding {self.weapon}.")
+    def look_at_character(self):
+        print(f"You see a {self.name}, dressed in {self.apparel.name}, wielding {self.weapon.name}.")
 
-    def loot_enemy(self, player):
+    def defeat_and_loot_character(self, player):
+        print(f"You defeated the {self.name} and gain {self.xp} experience.")
+        player.xp += self.xp
+        if player.xp >= 100:
+            player.xp -= 100
+            player.level += 1
+            player.health += player.health_mult
+            player.max_health += player.health_mult
+            print(f"You gained a level! You are now level {player.level}.")
+
         print(f"You loot the {self.name} and find {self.coins} coins.")
         player.coins += self.coins
+
+
+######################################################################################################################## 
+# Enemy Calculation Variables
+########################################################################################################################
+#
+# Weak Enemy variables
+weak_level = 0
+weak_xp = 5
+weak_coins = 3
+weak_health = 10
+weak_health_mult = 5
+
+# Moderate Enemy Variables
+
+# Hard Enemy Variables
+
+# Difficult Enemy Variables
+
+
+############################################################################################################################
+# End of Enemy Variables
+############################################################################################################################
+
+# Enemies
+goblin = Character("Goblin", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weapons.fists, apparel.rags)
+giant_rat = Character("Giant Rat", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weapons.claws, apparel.nothing)
+bandit = Character("Bandit", weak_level, 2 * weak_xp, 2* weak_coins, 2 * weak_health, weak_health_mult, weapons.copper_sword, apparel.rags)
+
+random_monster_list = [goblin, giant_rat, bandit]

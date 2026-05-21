@@ -3,12 +3,17 @@ import weapons
 import apparel
 import combat
 
-INITIALCOINS = 100
-INITIALLEVEL = 1
-INITIALXP = 0
+import random as rand
 
-def rest_inn(entity_character):
-    entity_character.health = entity_character.max_health
+INITIAL_COINS = 0
+INITIAL_LEVEL = 1
+INITIAL_XP = 0
+INITIAL_HEALTH = 100
+INITIAL_HEALTH_MULT = 10
+
+def rest_inn(player):
+    print(f"You heal to {player.max_health} from {player.health}.")
+    player.health = player.max_health
 
 def enter_the_inn(player):
     while True:
@@ -23,22 +28,35 @@ def enter_the_inn(player):
 
 def go_to_the_market(player):
     choice = str(input("You go to the market. Which store would you like to go to?\n\t1. Blacksmith\n\t2. Fletcher\n\t3. General Store\n"))
+    while True:
+        if choice == '1':
+            print("You enter Ingvar's shop. You hear the forge roaring, and the clanking of metal on metal. Ingvar greets you and asks if you want to buy anything.")
+            break
+        elif choice == '2':
+            print("Fletcher")
+            break
+        elif choice == '3':
+            print("General Store")
+            break
+        else:
+            print("Only 1, 2 or 3 are valid choices.")
+    
 
 def main():
     name = str(input("What is your name?\n"))
-    Hero = character.Character(name, INITIALLEVEL, INITIALXP, INITIALCOINS)
+    Hero = character.Character(name, INITIAL_LEVEL, INITIAL_XP, INITIAL_COINS, INITIAL_HEALTH,INITIAL_HEALTH_MULT, weapons.copper_sword, apparel.leather_armor)
     print("You start at level 1, with 100 coins. You are also granted a Copper Sword and Leather Armor.\n")
-    Hero.equip_weapon(weapons.copper_sword)
-    Hero.equip_apparel(apparel.leather_armor)
+
+    print("Welome to Mahitia!")
+    print("You are in the town of Scrimshaw, a small town whose economy is based on farming and the ivory trade.")
 
     while True:
-        print("Welome to Mahitia!")
-        print("You are in the town of Scrimshaw, a small town whose economy is based on farming and the ivory trade.")
+
         choice = str(input("What would you like to do?\n\t1. Fight Monsters\n\t2. Enter the Inn\n\t3. Go to the market.\n"))
 
         if choice == '1':
-            won_battle = None
-            won_battle = combat.random_monster_encounter(Hero)
+            enemy = rand.choice(character.random_monster_list)
+            won_battle = combat.random_monster_encounter(Hero, enemy)
             if won_battle == False:
                 break
             else:
