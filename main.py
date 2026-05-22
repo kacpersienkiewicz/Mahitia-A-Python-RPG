@@ -39,7 +39,7 @@ def main():
         elif choice =='4':
             town.inventory_management(Hero)
         else:
-            print(f"{choice} is not a valid choice. Please type in 1, 2, or 3.")
+            print(f"{choice} is not a valid choice. Please type in 1, 2, 3 or 4.")
             continue
     
     print(f"You have lost. You were level {Hero.level}, and had {Hero.coins} coins at death.")
