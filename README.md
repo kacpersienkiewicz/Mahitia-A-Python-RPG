@@ -1,6 +1,5 @@
 # Text RPG
-
-A small text-based RPG which includes turn based combat.
+A small text-based RPG created in Python.
 
 ## TODO
 * Implement store
