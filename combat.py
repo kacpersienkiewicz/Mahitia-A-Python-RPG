@@ -18,3 +18,7 @@ def random_monster_encounter(player, enemy):
         won_battle = True
 
     return won_battle
+
+
+def combat_action(attacker, defender):
+    pass
