@@ -5,7 +5,10 @@ class Apparel:
         self.value = value
 
     def __str__(self):
-        return f"{self.name} is a piece of armor which provides {self.armor} armor, and is worth {self.value} coins."
+        return self.name
+    
+    def describe_apparel(self):
+        print(f"{self.name} is a piece of armor which provides {self.armor} armor, and is worth {self.value} coins.")
 
 nothing = Apparel("Nothing", 0, 0)
 rags = Apparel("Rags", 0, 0)

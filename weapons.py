@@ -6,14 +6,18 @@ class Weapon:
         self.value = value
 
     def __str__(self):
-        return f"{self.name} is a weapon which does {self.damage} damage, and is worth {self.value} coins."
+        return self.name
+
+    def describe_weapon(self):
+        print(f"{self.name} is a weapon which does {self.damage} damage, and is worth {self.value} coins.")
 
 class Blade(Weapon):
-    def __init__(self, name, damage, damage_type, value, weapon_type="Blade"):
+    def __init__(self, name, damage, damage_type, value, stamina_special_attack_usage, weapon_type="Blade"):
         super().__init__(name, damage, damage_type, value)
+        self.stamina_special_attack_usage = stamina_special_attack_usage
         self.weapon_type = weapon_type
     
-    def slash(self, wielder, target):
+    def special_attack(self, wielder, target):
         pass
 
 fists = Weapon("Fists", 1, "Bludgeoning", 0)

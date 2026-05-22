@@ -15,8 +15,7 @@ INITIAL_STAMINA: int = 100
 INITIAL_STAMINA_MULT: int = 10
 
 def main():
-    name = str(input("What is your name?\n"))
-    Hero = character.Player(name, INITIAL_LEVEL, INITIAL_XP, INITIAL_COINS, INITIAL_HEALTH,INITIAL_HEALTH_MULT, INITIAL_STAMINA, INITIAL_STAMINA_MULT, weapons.copper_sword, apparel.leather_armor)
+    Hero = character.Player("Hero", INITIAL_LEVEL, INITIAL_XP, INITIAL_COINS, INITIAL_HEALTH,INITIAL_HEALTH_MULT, INITIAL_STAMINA, INITIAL_STAMINA_MULT, weapons.copper_sword, apparel.leather_armor)
     print(f"You start at level {INITIAL_LEVEL}, with {INITIAL_COINS} coins. You are also granted a Copper Sword and Leather Armor.\n")
 
     print("Welome to Mahitia!")
@@ -24,7 +23,7 @@ def main():
 
     while True:
 
-        choice = str(input("What would you like to do?\n\t1. Fight Monsters\n\t2. Rest at the Inn\n\t3. Buy Weapons/Armor\n"))
+        choice = input("What would you like to do?\n\t1. Fight Monsters\n\t2. Rest at the Inn\n\t3. Buy Weapons/Armor\n\t4. Manage Inventory\n")
 
         if choice == '1':
             enemy = rand.choice(character.weak_monster_list)
@@ -37,6 +36,8 @@ def main():
             town.enter_the_inn(Hero)
         elif choice == '3':
             town.go_to_the_market(Hero)
+        elif choice =='4':
+            town.inventory_management(Hero)
         else:
             print(f"{choice} is not a valid choice. Please type in 1, 2, or 3.")
             continue

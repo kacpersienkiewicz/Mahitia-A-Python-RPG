@@ -1,3 +1,5 @@
+"""Classes and Functions related to characters, including the player and enemies"""
+
 import weapons
 import apparel
 
@@ -56,10 +58,10 @@ class Character:
 class Player(Character):
     def __init__(self, name, level, xp, coins, health, health_mult, stamina, stamina_mult, weapon, apparel):
         super().__init__(name, level, xp, coins, health, health_mult, stamina, stamina_mult, weapon, apparel)
-        self.inventory = {weapon.name:weapon, apparel.name:apparel}
+        self.inventory = [weapon, apparel]
     
     def add_to_inventory(self, item):
-        self.inventory[str(item.name)] = item
+        self.inventory.append(item)
         print(f"{item} was added to your inventory")
 
 
