@@ -20,5 +20,10 @@ def random_monster_encounter(player, enemy):
     return won_battle
 
 
-def combat_action(attacker, defender):
+def player_combat_action(player, enemy):
+    """Defines what the player can do during combat"""
+    pass
+
+def enemy_combat_action(player, enemy):
+    """Defines enemy logic for combat"""
     pass
