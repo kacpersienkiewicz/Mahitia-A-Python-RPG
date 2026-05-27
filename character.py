@@ -2,6 +2,7 @@
 
 import weapons
 import apparel
+import combat
 
 class Character:
     def __init__(self, name: str, level: int, xp: int, coins: int, health: int, health_mult: int, stamina: int, stamina_mult: int, weapon, apparel):
@@ -45,12 +46,7 @@ class Character:
     def defeat_and_loot_character(self, player):
         print(f"You defeated the {self.name} and gain {self.xp} experience.")
         player.xp += self.xp
-        if player.xp >= 100:
-            player.xp -= 100
-            player.level += 1
-            player.health += player.health_mult
-            player.max_health += player.health_mult
-            print(f"You gained a level! You are now level {player.level}.")
+        combat.leveling(player)
 
         print(f"You loot the {self.name} and find {self.coins} coins.")
         player.coins += self.coins

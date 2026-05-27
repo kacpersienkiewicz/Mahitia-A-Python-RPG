@@ -2,10 +2,11 @@
 from town import inventory_management
 
 # 10 levels
-levels = [int(round(pow(x, 1.1))) for x in range(100, 1000, 100)] # TODO: Implement Levels
+levels = [int(round(pow(x, 1.1))) for x in range(100, 1000, 100)]
 
 def random_monster_encounter(player, enemy):
     enemy.look_at_character()
+    enemy.health = enemy.max_health
     print("You enter combat with them.")
     
     while True:
@@ -32,6 +33,7 @@ def player_combat_action(player, enemy):
     while True:
         if choice == '1':
             player.attack(enemy)
+            return
         elif choice == '2':
             pass # TODO
         elif choice == '3':
@@ -45,3 +47,15 @@ def player_combat_action(player, enemy):
 def enemy_combat_action(player, enemy):
     """Defines enemy logic for combat"""
     pass
+
+def leveling(player):
+    current_xp = player.xp
+    current_level = player.level
+    if current_level < len(levels):
+        next_level_threshold = levels[current_level - 1]
+        if current_xp >= next_level_threshold:
+            player.level += 1
+            player.health += player.health_mult
+            player.max_health += player.health_mult
+            print(f"You gained a level! You are now level {player.level}.")
+    return

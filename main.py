@@ -26,7 +26,7 @@ def main():
         choice = input("What would you like to do?\n\t1. Fight Monsters\n\t2. Rest at the Inn\n\t3. Buy Weapons/Armor\n\t4. Manage Inventory\n")
 
         if choice == '1':
-            enemy = rand.choice(character.weak_monster_list)
+            enemy = rand.choice(character.weak_random_monster_list)
             won_battle = combat.random_monster_encounter(Hero, enemy)
             if won_battle == False:
                 break

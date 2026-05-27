@@ -106,30 +106,32 @@ def go_to_the_market(player):
 
 def inventory_management(player):
     """Allows the player to equip a different weapon or piece of armor. """
-    print(f"Your inventory is:\n")
-    for i, item in enumerate(player.inventory):
-        print(f"{i}\t{item}")
 
-    print(f"You are currently wearing the {player.apparel.name} and are wielding the {player.weapon.name}.")
-    choice = input("Would you like equip any of these items? Enter the item's index to equip it, or enter '-1' to stop managing your inventory.\n")
-    
     while True:
-        if choice == '-1':
+        print(f"Your inventory is:\n")
+        for i, item in enumerate(player.inventory):
+            print(f"{i}\t{item}")
+        print(f"You are currently wearing the {player.apparel.name} and are wielding the {player.weapon.name}.")
+        choice = input("Would you like equip any of these items? Enter the item's index to equip it, or enter '-1' to stop managing your inventory.\n")
+
+        try:
+            inventory_index = int(choice)
+        except ValueError:
+            print("Please enter a valid index.")
+            continue
+
+        if inventory_index == -1:
             break
+        elif inventory_index < len(player.inventory):
+            selected_item = player.inventory[inventory_index]
+            if type(selected_item) == type(weapons.purchasable_weapons[0]):
+                player.equip_weapon(selected_item)
+                print(f"You wield the {selected_item}.")
+                break
+            if type(selected_item) == type(apparel.purchasable_apparel[0]):
+                player.equip_apparel(selected_item)
+                print(f"You put on the {selected_item}.")
+                break       
         else:
-            try:
-                inventory_index = int(choice)
-                if inventory_index < len(player.inventory):
-                    selected_item = player.inventory[inventory_index]
-                    if type(selected_item) == type(weapons.purchasable_weapons[0]):
-                        player.equip_weapon(selected_item)
-                        print(f"You wield the {selected_item}.")
-                        break
-                    if type(selected_item) == type(apparel.purchasable_apparel[0]):
-                        player.equip_apparel(selected_item)
-                        print(f"You put on the {selected_item}.")
-                        break       
-                else:
-                    print("Please enter a valid index.")
-            except ValueError:
-                    print("Please enter a valid index.")
+            print("Please enter a valid index.")
+            continue
