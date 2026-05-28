@@ -1,8 +1,5 @@
-"""Functions related to combat, questing or leveling (since leveling is dependent on combat and questing)."""
+"""Functions related to combat"""
 from town import inventory_management
-
-# 10 levels
-levels = [int(round(pow(x, 1.1))) for x in range(100, 1000, 100)]
 
 def random_monster_encounter(player, enemy):
     enemy.look_at_character()
@@ -13,8 +10,15 @@ def random_monster_encounter(player, enemy):
         if player.health <= 0 or enemy.health <= 0:
             break
 
-        player.attack(enemy)
-        enemy.attack(player)
+        player.weapon.attack(enemy)
+        enemy.weapon.attack(player)
+
+        player.stamina += player.stamina_mult
+        if player.stamina > player.max_stamina:
+            player.stamina = player.max_stamina
+        enemy.stamina += enemy.stamina_mult
+        if enemy.stamina > enemy.max_stamina:
+            enemy.stamina = enemy.max_stamina
 
     if player.health <= 0:
         print("You have been defeated.")
@@ -26,38 +30,63 @@ def random_monster_encounter(player, enemy):
 
     return won_battle
 
-
 def player_combat_action(player, enemy):
     """Defines what the player can do during combat"""
-    choice = input(f"What would you like to do?\n\t1. Standard Attack\n\t2. Weapon Special Attack (Costs x Stamina)\n\t3. Inventory Management\n\t4. Character Status\n")
+    choice = input(f"What would you like to do?\n\t1. Standard Attack\n\t2. Double Strike (Costs 25 Stamina)\n\t3. Armor Piercing Strike (costs {25 + 5 * enemy.armor})\n\t4. Inventory Management\n\t5. Character Status\n")
     while True:
         if choice == '1':
             player.attack(enemy)
             return
         elif choice == '2':
-            pass # TODO
+            if player.stamina < 25:
+                print(f"You do not have the required stamina to use double strike. You need 25 stamina and you have {player.stamina} stamina.")
+                continue
+            else:
+                player.weapon.double_strike(player, enemy)
         elif choice == '3':
-            inventory_management(player)
+            stamina_cost = (25 + 5 * enemy.armor)
+            if player.stamina < stamina_cost:
+                print(f"You do not have the required stamina to use the armor piercing strike. You need {stamina_cost} stamina and you have {player.stamina} stamina.")
+                continue
+            else:
+                player.weapon.armor_pierce(player, enemy)
+
         elif choice == '4':
+            inventory_management(player)
+        elif choice == '5':
             print(f"You are at {player.health} health, {player.stamina} stamina, and are wearing {player.apparel.name} and wielding a {player.weapon.name}.")
         else:
             print(f"{choice} is not a valid choice. Please type in 1, 2, 3 or 4.")  
 
 
-def enemy_combat_action(player, enemy):
-    """Defines enemy logic for combat"""
-    pass
+def enemy_combat_action(player, enemy, strategy="Simple"):
+    """
+    Defines enemy logic for combat
+    Simple: only standard attack
+    Cautious Double Strike: Uses Double Strike at max stamina
+    Armor Aware: Uses Armor Piercing Strike if the player's armor blocks half or more of their damage and they are at max stamina. 
+    Complex: Willing to use all of their stamina. Uses Armor Piercing Strike if armor blocks half or more damage, otherwise uses Double Strike.
+    """
+    if strategy == "Simple":
+        enemy.weapon.attack(enemy, player)
+    elif strategy == "Cautious Double Strike":
+        if enemy.stamina == enemy.max_stamina:
+            enemy.weapon.double_strike()
+    elif strategy == "Armor Aware":
+        blocked_damage_threshold = enemy.damage // 2
+        if player.armor >= blocked_damage_threshold and enemy.stamina == enemy.max_stamina:
+            enemy.weapon.armor_pierce(enemy, player)
+        else:
+            enemy.weapon.attack(enemy, player)
+    elif strategy == "Complex":
+        blocked_damage_threshold = enemy.damage // 2
+        armor_pierce_stamina_cost = 25 + player.armor * 5
+        if player.armor >= blocked_damage_threshold and enemy.stamina >= armor_pierce_stamina_cost:
+            enemy.weapon.armor_pierce(enemy, player)
+        elif enemy.stamina >= 25:
+            enemy.weapon.double_strike(enemy, player)
+        else:
+            enemy.weapon.attack(enemy, player)
+    else:
+        print(f"{strategy} is not a documented strategy.")
 
-def leveling(player):
-    current_xp = player.xp
-    current_level = player.level
-    if current_level < len(levels):
-        next_level_threshold = levels[current_level - 1]
-        if current_xp >= next_level_threshold:
-            player.level += 1
-            player.health += player.health_mult
-            player.max_health += player.health_mult
-            player.stamina += player.stamina_mult
-            player.max_stamina += player.stamina_mult
-            print(f"You gain a level! You are now level {player.level}.")
-    return

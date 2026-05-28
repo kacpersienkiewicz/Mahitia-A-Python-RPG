@@ -11,14 +11,29 @@ class Weapon:
     def describe_weapon(self):
         print(f"{self.name} is a weapon which does {self.damage} damage, and is worth {self.value} coins.")
 
-class Blade(Weapon):
-    def __init__(self, name, damage, damage_type, value, stamina_special_attack_usage, weapon_type="Blade"):
-        super().__init__(name, damage, damage_type, value)
-        self.stamina_special_attack_usage = stamina_special_attack_usage
-        self.weapon_type = weapon_type
+    def attack(self, target):
+        damage = self.damage - target.armor
+        if damage < 0:
+            damage = 0
+        target.health -= damage
+        print(f"{self.name} attacks {target.name} for {damage} damage, who now has {target.health} health left.")
     
-    def special_attack(self, wielder, target):
-        pass
+    def double_strike(self, user, target):
+        stamina_cost = 25
+        user.stamina -= stamina_cost
+        damage = (2 * self.damage) - target.armor
+        if damage < 0:
+            damage = 0
+        target.health -= damage
+        print(f"{self.name} attacks {target.name} twice for {damage} damage, who now has {target.health} health left.")
+
+    def armor_pierce(self,user, target):
+        stamina_cost = 25 + target.armor * 5
+        user.stamina -= stamina_cost
+        damage = self.damage
+        target.health -= damage
+        print(f"{self.name} attacks {target.name} for {damage} damage, piercing through {target.armor} armor, who now has {target.health} health left.")
+
 
 fists = Weapon("Fists", 1, "Bludgeoning", 0)
 claws = Weapon("Claws", 2, "Slashing", 0)
