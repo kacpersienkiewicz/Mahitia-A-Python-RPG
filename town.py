@@ -1,7 +1,7 @@
 import weapons
 import apparel
 
-def enter_the_inn(player):
+def enter_the_inn(player) -> None:
     """Player enters the inn to rest."""
     while True:
         choice = input("You enter the Ivory Inn. The innkeeper, Jane, greets you. Would you like to grab a room to rest (10 coins)?[y/n]\n")
@@ -14,14 +14,14 @@ def enter_the_inn(player):
         else:
             print("Only 'y' or 'n' are valid inputs. Please type one of those.")
 
-def rest_inn(player):
+def rest_inn(player) -> None:
     """Simply allows the player to restore health and stamina"""
     print(f"You heal to {player.max_health} health from {player.health} health.")
     player.health = player.max_health
     print(f"You heal to {player.max_stamina} stamina from {player.stamina} stamina.")
     player.stamina = player.max_stamina
 
-def go_to_the_market(player):
+def go_to_the_market(player) -> None:
     """Allows the player to buy new armor or weapons from the store. It should add the bought item to their inventory and allow them to equip it."""
     choice = input("You go to the general store. Ingvar has a variety of weapons, and armor for sale. What would you like to buy:\n\t1. Weapons\n\t2. Armor\n\t3. Leave the shop\n")
     while True:
@@ -36,7 +36,7 @@ def go_to_the_market(player):
         else:
             print(f"{choice} is not a valid choice. Please type in 1, 2, or 3.")           
 
-def inventory_management(player):
+def inventory_management(player) -> None:
     """Allows the player to equip a different weapon or piece of armor. """
 
     while True:
@@ -68,7 +68,7 @@ def inventory_management(player):
             print("Please enter a valid index.")
             continue
 
-def equip_item(player, item):
+def equip_item(player, item) -> None:
     """Equip an equippable item."""
     if isinstance(item, weapons.Weapon):
         player.equip_weapon(item)
@@ -78,7 +78,7 @@ def equip_item(player, item):
         print(f"Cannot equip item of type {type(item)}")
     return
 
-def present_store_stock(stock):
+def present_store_stock(stock) -> None:
     """Prints out the store's stock in a tabular fashion"""
     if isinstance(stock[0], weapons.Weapon):
         print(f"Index\tName\t\tDamage\tDamage Type\tPrice")
@@ -90,9 +90,8 @@ def present_store_stock(stock):
             print(f"{key}\t{value.name}\t{value.armor}\t{value.value}")
     else:
         print(f"{type(stock[0])} is an invalid type for presenting store stock.")
-    return
 
-def store_logic(player, stock):
+def store_logic(player, stock) -> None:
     """Takes in a store's stock, the player's info and figures out the logic for the store so the player can buy stuff."""
     while True:
         present_store_stock(stock)

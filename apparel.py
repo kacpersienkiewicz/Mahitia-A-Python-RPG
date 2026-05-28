@@ -1,5 +1,5 @@
 class Apparel:
-    def __init__(self, name, armor, value):
+    def __init__(self, name: str, armor: int, value: int):
         self.name = name
         self.armor = armor
         self.value = value

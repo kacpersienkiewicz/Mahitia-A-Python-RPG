@@ -1,7 +1,7 @@
 """Functions related to combat"""
 from town import inventory_management
 
-def random_monster_encounter(player, enemy):
+def random_monster_encounter(player, enemy) -> bool:
     enemy.look_at_character()
     enemy.health = enemy.max_health
     print("You enter combat with them.")
@@ -30,7 +30,7 @@ def random_monster_encounter(player, enemy):
 
     return won_battle
 
-def player_combat_action(player, enemy):
+def player_combat_action(player, enemy) -> None:
     """Defines what the player can do during combat"""
     while True:
         choice = input(f"What would you like to do?\n\t1. Standard Attack\n\t2. Double Strike (Costs 25 Stamina)\n\t3. Armor Piercing Strike (Costs {25 + 5 * enemy.armor} Stamina)\n\t4. Inventory Management\n\t5. Character Status\n")
@@ -63,7 +63,7 @@ def player_combat_action(player, enemy):
             print(f"{choice} is not a valid choice. Please type in 1, 2, 3 or 4.")
             continue
 
-def enemy_combat_action(player, enemy):
+def enemy_combat_action(player, enemy) -> None:
     """
     Defines enemy logic for combat
     Simple: only standard attack
