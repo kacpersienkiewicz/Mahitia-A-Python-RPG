@@ -23,7 +23,7 @@ def main():
 
     while True:
 
-        choice = input("What would you like to do?\n\t1. Fight Monsters\n\t2. Rest at the Inn\n\t3. Buy Weapons/Armor\n\t4. Manage Inventory\n")
+        choice = input("What would you like to do?\n\t1. Fight Monsters\n\t2. Rest at the Inn\n\t3. Buy Weapons/Armor\n\t4. Manage Inventory\n\t5. Check Character Status\n")
 
         if choice == '1':
             enemy = rand.choice(character.weak_random_monster_list)
@@ -38,6 +38,8 @@ def main():
             town.go_to_the_market(Hero)
         elif choice =='4':
             town.inventory_management(Hero)
+        elif choice == '5':
+            print(Hero)
         else:
             print(f"{choice} is not a valid choice. Please type in 1, 2, 3 or 4.")
             continue

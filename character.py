@@ -23,7 +23,7 @@ class Character:
         self.armor = apparel.armor
 
     def __str__(self):
-        return f"{self.name} is a level {self.level} {self.character_class}."
+        return f"{self.name} is a level {self.level} {self.character_class}. They are dressed in {self.apparel} and are wielding a {self.weapon}. They currently have {self.xp} experience."
 
     def equip_weapon(self, weapon):
         self.weapon = weapon
@@ -42,6 +42,7 @@ class Character:
 
     def look_at_character(self):
         print(f"You see a {self.name}, dressed in {self.apparel.name}, wielding {self.weapon.name}.")
+
 
     def defeat_and_loot_character(self, player):
         print(f"You defeat the {self.name} and gain {self.xp} experience.")

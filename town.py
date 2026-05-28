@@ -120,5 +120,6 @@ def store_logic(player, stock):
                     else:
                         print("Only 'y' or 'n' are valid inputs. Please enter one of those.")
                         continue
+                break
             else:
                 print(f"You cannot afford the {purchased_item.name} as you only have {player.coins} and it costs {purchased_item.value} coins.")
