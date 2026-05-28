@@ -44,7 +44,7 @@ class Character:
         print(f"You see a {self.name}, dressed in {self.apparel.name}, wielding {self.weapon.name}.")
 
     def defeat_and_loot_character(self, player):
-        print(f"You defeated the {self.name} and gain {self.xp} experience.")
+        print(f"You defeat the {self.name} and gain {self.xp} experience.")
         player.xp += self.xp
         combat.leveling(player)
 

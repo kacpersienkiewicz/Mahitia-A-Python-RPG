@@ -17,7 +17,7 @@ def random_monster_encounter(player, enemy):
         enemy.attack(player)
 
     if player.health <= 0:
-        print("You were defeated.")
+        print("You have been defeated.")
         won_battle = False
     else:
         print("You are victorious!")
@@ -59,5 +59,5 @@ def leveling(player):
             player.max_health += player.health_mult
             player.stamina += player.stamina_mult
             player.max_stamina += player.stamina_mult
-            print(f"You gained a level! You are now level {player.level}.")
+            print(f"You gain a level! You are now level {player.level}.")
     return
