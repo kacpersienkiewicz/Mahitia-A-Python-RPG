@@ -57,5 +57,7 @@ def leveling(player):
             player.level += 1
             player.health += player.health_mult
             player.max_health += player.health_mult
+            player.stamina += player.stamina_mult
+            player.max_stamina += player.stamina_mult
             print(f"You gained a level! You are now level {player.level}.")
     return
