@@ -1,5 +1,19 @@
 """Functions related to combat"""
 from town import inventory_management
+import character
+import random as rand
+
+def choose_random_monster(player) -> character.Character:
+    if player.level < 5:
+        monster_list = rand.choice(character.monster_roster[:1])
+        enemy = rand.choice(monster_list)
+    elif player.level < 10:
+        monster_list = rand.choice(character.monster_roster[:2])
+        enemy = rand.choice(monster_list)    
+    else:
+        monster_list = rand.choice(character.monster_roster)
+        enemy = rand.choice(monster_list)
+    return enemy
 
 def random_monster_encounter(player, enemy) -> bool:
     enemy.look_at_character()

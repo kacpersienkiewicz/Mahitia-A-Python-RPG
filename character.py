@@ -2,7 +2,6 @@
 
 import weapons
 import apparel
-import combat
 
 class Character:
     def __init__(self, name: str, level: int, xp: int, coins: int, health: int, health_mult: int, stamina: int, stamina_mult: int, weapon, apparel, combat_strategy="Simple"):
@@ -92,9 +91,11 @@ bandit = Character("Bandit", weak_level, 2 * weak_xp, 2* weak_coins, 2 * weak_he
 
 # Moderate
 
-
 weak_random_monster_list = [goblin, goblin_warrior, giant_rat, bandit]
 moderate_random_monster_list = []
+hard_random_monster_list = []
+
+monster_roster = [weak_random_monster_list, moderate_random_monster_list, hard_random_monster_list]
 
 ############################################################################################################################
 # Leveling
