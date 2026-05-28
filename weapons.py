@@ -11,12 +11,12 @@ class Weapon:
     def describe_weapon(self):
         print(f"{self.name} is a weapon which does {self.damage} damage, and is worth {self.value} coins.")
 
-    def attack(self, target):
+    def attack(self, user, target):
         damage = self.damage - target.armor
         if damage < 0:
             damage = 0
         target.health -= damage
-        print(f"{self.name} attacks {target.name} for {damage} damage, who now has {target.health} health left.")
+        print(f"{user.name} attacks {target.name} for {damage} damage, who now has {target.health} health left.")
     
     def double_strike(self, user, target):
         stamina_cost = 25
@@ -25,14 +25,14 @@ class Weapon:
         if damage < 0:
             damage = 0
         target.health -= damage
-        print(f"{self.name} attacks {target.name} twice for {damage} damage, who now has {target.health} health left.")
+        print(f"{user.name} attacks {target.name} twice for {damage} damage, who now has {target.health} health left.")
 
     def armor_pierce(self,user, target):
         stamina_cost = 25 + target.armor * 5
         user.stamina -= stamina_cost
         damage = self.damage
         target.health -= damage
-        print(f"{self.name} attacks {target.name} for {damage} damage, piercing through {target.armor} armor, who now has {target.health} health left.")
+        print(f"{user.name} attacks {target.name} for {damage} damage, piercing through {target.armor} armor, who now has {target.health} health left.")
 
 
 fists = Weapon("Fists", 1, "Bludgeoning", 0)

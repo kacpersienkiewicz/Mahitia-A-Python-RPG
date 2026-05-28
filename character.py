@@ -24,7 +24,7 @@ class Character:
         self.combat_strategy = combat_strategy
 
     def __str__(self):
-        return f"{self.name} is a level {self.level} {self.character_class}. They are dressed in {self.apparel} and are wielding a {self.weapon}. They currently have {self.xp} experience."
+        return f"{self.name} is a level {self.level} {self.character_class}. They are dressed in {self.apparel} and are wielding a {self.weapon}. They currently have {self.xp} experience and {self.coins} coins."
 
     def equip_weapon(self, weapon):
         self.weapon = weapon
@@ -40,7 +40,7 @@ class Character:
     def defeat_and_loot_character(self, player):
         print(f"You defeat the {self.name} and gain {self.xp} experience.")
         player.xp += self.xp
-        combat.leveling(player)
+        leveling(player)
 
         print(f"You loot the {self.name} and find {self.coins} coins.")
         player.coins += self.coins
@@ -86,13 +86,14 @@ moderate_stamina_mult = 10
 # Enemies
 # Weak
 goblin = Character("Goblin", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weak_stamina, weak_stamina_mult, weapons.fists, apparel.rags)
+goblin_warrior = Character("Goblin Warrior", weak_level, 2 * weak_xp, 2* weak_coins, 2 * weak_health, weak_health_mult, 2 * weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.rags, combat_strategy = "Cautious Double Strike")
 giant_rat = Character("Giant Rat", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weak_stamina, weak_stamina_mult, weapons.claws, apparel.nothing)
 bandit = Character("Bandit", weak_level, 2 * weak_xp, 2* weak_coins, 2 * weak_health, weak_health_mult, 2 * weak_stamina, weak_stamina_mult, weapons.copper_sword, apparel.rags, combat_strategy = "Cautious Double Strike")
 
 # Moderate
 
 
-weak_random_monster_list = [goblin, giant_rat, bandit]
+weak_random_monster_list = [goblin, goblin_warrior, giant_rat, bandit]
 moderate_random_monster_list = []
 
 ############################################################################################################################
