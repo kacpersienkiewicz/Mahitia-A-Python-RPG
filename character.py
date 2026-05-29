@@ -62,9 +62,9 @@ weak_level = 0
 moderate_level = 3
 hard_level = 5
 
-weak_xp = 10
-moderate_xp = 25
-hard_xp = 50
+weak_xp = 25
+moderate_xp = 50
+hard_xp = 75
 
 weak_coins = 5
 moderate_coins = 15
@@ -103,21 +103,21 @@ bear = Character("Bear", weak_level, moderate_xp, weak_coins, 3 * weak_health, w
 # Moderate
 rat_king = Character("Rat King", weak_level, moderate_xp, moderate_coins, 2 * moderate_health, moderate_health_mult, moderate_stamina, moderate_stamina_mult, weapons.claws, apparel.rags, combat_strategy="Cautious Double Strike")
 bandit_highwayman = Character("Bandit", moderate_level, moderate_xp, moderate_coins, moderate_health, 2 * moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.leather_armor, combat_strategy="Cautious Double Strike")
-dark_squire = Character("Dark Squire", moderate_level, 2 * moderate_xp, 2 * moderate_coins, moderate_health, 2 * moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.iron_sword, apparel.leather_armor, combat_strategy="Armor Aware")
-goblin_captain = Character("Goblin Captain", moderate_level, moderate_xp, 2 * moderate_coins, weak_health, moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.leather_armor, combat_strategy="Cautious Double Strike")
+dark_squire = Character("Dark Squire", moderate_level, 2 * moderate_xp, 2 * moderate_coins, moderate_health, 2 * moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.bronze_sword, apparel.bronze_armor, combat_strategy="Armor Aware")
+goblin_captain = Character("Goblin Captain", moderate_level, 2 * moderate_xp, 2 * moderate_coins, weak_health, moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.leather_armor, combat_strategy="Reckless Double Strike")
 wolf_dire = Character("Dire Wolf", moderate_level, moderate_xp, moderate_coins, moderate_health, moderate_health_mult, moderate_stamina, 2 * moderate_stamina_mult, weapons.claws, apparel.rags, combat_strategy="Cautious Double Strike")
 bear_dire = Character("Dire Bear", moderate_level, 2 * moderate_xp, moderate_coins, moderate_health, 2 * moderate_health_mult, moderate_stamina, 2 * moderate_stamina_mult, weapons.claws, apparel.rags, combat_strategy="Cautious Double Strike")
 
 # Hard
-dark_knight = Character("Dark Knight")
-goblin_commander = Character("Goblin Commander")
-bandit_lord = Character("Bandit Lord")
+dark_knight = Character("Dark Knight", hard_level, 2 * hard_xp, 2 * hard_coins, hard_health, hard_health_mult, hard_stamina, 3 * hard_stamina_mult, weapons.steel_sword, apparel.steel_armor, combat_strategy="Complex")
+bandit_lord = Character("Bandit Lord", hard_level, hard_xp, 2 * hard_coins, hard_health, hard_health_mult, hard_stamina, 2 * hard_stamina_mult, weapons.iron_sword, apparel.bronze_armor, combat_strategy="Complex")
+goblin_commander = Character("Goblin Commander", hard_level, hard_xp, hard_coins, hard_health, hard_health_mult, hard_stamina, hard_stamina_mult, weapons.bronze_sword, apparel.iron_armor, combat_strategy="Reckless Double Strike")
 
 
 # Monster Lists
 weak_random_monster_list = [goblin, goblin_warrior, giant_rat, bandit, wolf, bear]
 moderate_random_monster_list = [rat_king, bandit_highwayman, dark_squire, goblin_captain, wolf_dire, bear_dire]
-hard_random_monster_list = []
+hard_random_monster_list = [dark_knight, bandit_lord, goblin_commander]
 
 monster_roster = [weak_random_monster_list, moderate_random_monster_list, hard_random_monster_list]
 

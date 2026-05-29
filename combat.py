@@ -82,7 +82,8 @@ def enemy_combat_action(player, enemy) -> None:
     Defines enemy logic for combat
     Simple: only standard attack
     Cautious Double Strike: Uses Double Strike at max stamina
-    Armor Aware: Uses Armor Piercing Strike if the player's armor blocks half or more of their damage and they are at max stamina. 
+    Reckless Double Strike: Uses Double Strike as possible
+    Armor Aware: Uses Armor Piercing Strike if the player's armor blocks half or more of their damage and they are at max stamina.
     Complex: Willing to use all of their stamina. Uses Armor Piercing Strike if armor blocks half or more damage, otherwise uses Double Strike.
     """
     if enemy.combat_strategy == "Simple":
@@ -92,12 +93,17 @@ def enemy_combat_action(player, enemy) -> None:
             enemy.weapon.double_strike(enemy, player)
         else:
             enemy.weapon.attack(enemy, player)
+    elif enemy.combat_strategy == "Reckless Double Strike":
+        if enemy.stamina >= 25:
+            enemy.weapon.double_strike(enemy, player)
+        else:
+            enemy.weapon.attack(enemy, player)           
     elif enemy.combat_strategy == "Armor Aware":
         blocked_damage_threshold = enemy.damage // 2
         if player.armor >= blocked_damage_threshold and enemy.stamina == enemy.max_stamina:
             enemy.weapon.armor_pierce(enemy, player)
         else:
-            enemy.weapon.attack(enemy, player)
+            enemy.weapon.attack(enemy, player)      
     elif enemy.combat_strategy == "Complex":
         blocked_damage_threshold = enemy.damage // 2
         armor_pierce_stamina_cost = 25 + player.armor * 5
