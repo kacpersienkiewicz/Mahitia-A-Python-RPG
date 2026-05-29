@@ -57,42 +57,66 @@ class Player(Character):
 ######################################################################################################################## 
 # Enemy Calculation Variables
 ########################################################################################################################
-#
-# Weak Enemy variables
+
 weak_level = 0
-weak_xp = 10
-weak_coins = 5
-weak_health = 10
-weak_health_mult = 5
-weak_stamina = 10
-weak_stamina_mult = 5
-
-# Moderate Enemy Variables
-
 moderate_level = 3
-moderate_xp = 25
-moderate_coins = 15
-moderate_health = 25
-moderate_health_mult = 10
-moderate_stamina = 25
-moderate_stamina_mult = 10
+hard_level = 5
 
+weak_xp = 10
+moderate_xp = 25
+hard_xp = 50
+
+weak_coins = 5
+moderate_coins = 15
+hard_coins = 25
+
+weak_health = 10
+moderate_health = 20
+hard_health = 35
+
+weak_health_mult = 5
+moderate_health_mult= 10
+hard_health_mult = 20
+
+weak_stamina = 10
+moderate_stamina = 25
+hard_stamina = 50
+
+weak_stamina_mult = 5
+moderate_stamina_mult= 15
+hard_stamina_mult = 25
 
 ############################################################################################################################
 # End of Enemy Variables
 ############################################################################################################################
 
 # Enemies
+
 # Weak
 goblin = Character("Goblin", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weak_stamina, weak_stamina_mult, weapons.fists, apparel.rags)
-goblin_warrior = Character("Goblin Warrior", weak_level, 2 * weak_xp, 2* weak_coins, 2 * weak_health, weak_health_mult, 2 * weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.rags, combat_strategy = "Cautious Double Strike")
-giant_rat = Character("Giant Rat", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weak_stamina, weak_stamina_mult, weapons.claws, apparel.nothing)
-bandit = Character("Bandit", weak_level, 2 * weak_xp, 2* weak_coins, 2 * weak_health, weak_health_mult, 2 * weak_stamina, weak_stamina_mult, weapons.copper_sword, apparel.rags, combat_strategy = "Cautious Double Strike")
+goblin_warrior = Character("Goblin Warrior", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weak_stamina, weak_stamina_mult, weapons.copper_sword, apparel.rags)
+giant_rat = Character("Giant Rat", weak_level, weak_xp, weak_coins, weak_health, weak_health_mult, weak_stamina, weak_stamina_mult, weapons.claws, apparel.rags)
+bandit = Character("Bandit", weak_level, 2 * weak_xp, 2 * weak_coins, 2 * weak_health, weak_health_mult, 3 * weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.rags, combat_strategy="Cautious Double Strike")
+wolf = Character("Wolf", weak_level, weak_xp, weak_coins, 2 * weak_health, weak_health_mult, 3 * weak_stamina, 3 * weak_stamina_mult, weapons.claws, apparel.nothing, combat_strategy="Cautious Double Strike")
+bear = Character("Bear", weak_level, moderate_xp, weak_coins, 3 * weak_health, weak_health_mult, 3 * weak_stamina, 2 *weak_stamina_mult, weapons.claws, apparel.nothing, combat_strategy="Cautious Double Strike")
 
 # Moderate
+rat_king = Character("Rat King", weak_level, moderate_xp, moderate_coins, 2 * moderate_health, moderate_health_mult, moderate_stamina, moderate_stamina_mult, weapons.claws, apparel.rags, combat_strategy="Cautious Double Strike")
+bandit_highwayman = Character("Bandit", moderate_level, moderate_xp, moderate_coins, moderate_health, 2 * moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.leather_armor, combat_strategy="Cautious Double Strike")
+dark_squire = Character("Dark Squire", moderate_level, 2 * moderate_xp, 2 * moderate_coins, moderate_health, 2 * moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.iron_sword, apparel.leather_armor, combat_strategy="Armor Aware")
+goblin_captain = Character("Goblin Captain", moderate_level, moderate_xp, 2 * moderate_coins, weak_health, moderate_health_mult, weak_stamina, 2 * weak_stamina_mult, weapons.copper_sword, apparel.leather_armor, combat_strategy="Cautious Double Strike")
+wolf_dire = Character("Dire Wolf", moderate_level, moderate_xp, moderate_coins, moderate_health, moderate_health_mult, moderate_stamina, 2 * moderate_stamina_mult, weapons.claws, apparel.rags, combat_strategy="Cautious Double Strike")
+bear_dire = Character("Dire Bear", moderate_level, 2 * moderate_xp, moderate_coins, moderate_health, 2 * moderate_health_mult, moderate_stamina, 2 * moderate_stamina_mult, weapons.claws, apparel.rags, combat_strategy="Cautious Double Strike")
 
-weak_random_monster_list = [goblin, goblin_warrior, giant_rat, bandit]
-moderate_random_monster_list = []
+# Hard
+dark_knight = Character("Dark Knight")
+goblin_commander = Character("Goblin Commander")
+bandit_lord = Character("Bandit Lord")
+
+
+# Monster Lists
+weak_random_monster_list = [goblin, goblin_warrior, giant_rat, bandit, wolf, bear]
+moderate_random_monster_list = [rat_king, bandit_highwayman, dark_squire, goblin_captain, wolf_dire, bear_dire]
 hard_random_monster_list = []
 
 monster_roster = [weak_random_monster_list, moderate_random_monster_list, hard_random_monster_list]
