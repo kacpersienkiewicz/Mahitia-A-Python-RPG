@@ -76,6 +76,22 @@ def quest_function_forest_cleanup(player, quest: Quest):
 
 def quest_function_bandit_lord_showdown(player, quest: Quest):
     """A bandit lord has challenged the player, and the player takes the challenge."""
+    print("Bandits don't typically openly challenge people. They skulk in the shadows near the road and ambush unsuspecting travelers, but this one is different. They wait at the town's center for you.")
+    print("As expected, the bandit lord is found at the center of town, but they're with an entourage.\nThe Bandit Lord screams: 'Prove your worth before you can face me worm!'\nYou are attacked by three bandits.")
+
+    combat.monster_encounter(player, character.bandit)
+    combat.monster_encounter(player, character.bandit)
+    combat.monster_encounter(player, character.bandit)
+
+    print("You were easily able to take care of the bandits, and the bandit lord is strangely satisfied with your performance.\n'Excellent. Now defeat my personal guard'\nYou are attacked by two better armed bandits.")
+    combat.monster_encounter(player, character.bandit_highwayman)
+    combat.monster_encounter(player, character.bandit_highwayman)
+
+    print("The Bandit Lord seems incredibly excited now and exclaims: 'Finally, a challenge' and lunges at you.")
+    combat.monster_encounter(player, character.bandit_lord)
+
+    print("With the Bandit Lord dead and looted, you can leave this strange chapter of your life behind.")
+
     print("You head back to the inn to get your reward.")
     player.xp += quest.xp_reward
     player.coins += quest.coins_reward
@@ -83,6 +99,8 @@ def quest_function_bandit_lord_showdown(player, quest: Quest):
 
 def quest_function_dark_knights_fortress(player, quest: Quest):
     """The source of local troubles is pinned on a Dark Knight's Fortress. The Player is tasked with defeating the Dark Knights."""
+
+
     print("You head back to the inn to get your reward.")
     player.xp += quest.xp_reward
     player.coins += quest.coins_reward
