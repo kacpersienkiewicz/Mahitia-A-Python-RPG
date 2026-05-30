@@ -99,8 +99,46 @@ def quest_function_bandit_lord_showdown(player, quest: Quest):
 
 def quest_function_dark_knights_fortress(player, quest: Quest):
     """The source of local troubles is pinned on a Dark Knight's Fortress. The Player is tasked with defeating the Dark Knights."""
+    print("After speaking with Fred the Farmer, you are able to figure out where the fortress is. You see two entrances: the large front double door, and a side entrance.")
+    while True:
+        choice = input("Which path do you want to take?\n\t1. Front Door \n\t2. Side Entrance\n")
+        if choice == '1':
+            print("Usurprisingly, the front path is guarded, by a few dark squires.")
+            combat.monster_encounter(player, character.dark_squire)
+            combat.monster_encounter(player, character.dark_squire)
 
+            print("You find a key which is able to open the large double doors, leading to a great hall and several more squires.")
+            combat.monster_encounter(player, character.dark_squire)
+            combat.monster_encounter(player, character.dark_squire)
+            combat.monster_encounter(player, character.dark_squire)
 
+            print("The screams of the dying squires draws two dark knights into the hall to fight you.")
+            combat.monster_encounter(player, character.dark_knight)
+            combat.monster_encounter(player, character.dark_knight)
+
+            break
+
+        elif choice == '2':
+            print("For some reason, the side entrance is unlocked and leads into a food preparation area with a single dark squire in it.")
+            combat.monster_encounter(player, character.dark_squire)
+
+            print("You're able to sneak around fairly easily leading to a great hall which has a few squires and a dark knight within. They unfortunately spot you and egage you.")
+            combat.monster_encounter(player, character.dark_squire)
+            combat.monster_encounter(player, character.dark_squire)
+            combat.monster_encounter(player, character.dark_knight)
+
+            print("The dark knight is dead but another one appears with an entourage of two squires.")
+            combat.monster_encounter(player, character.dark_knight)
+            combat.monster_encounter(player, character.dark_squire)
+            combat.monster_encounter(player, character.dark_squire)
+
+            break
+
+        else:
+            print("Only '1' or '2' are valid inputs. Please enter one of those.")
+            continue
+        
+    print("With two knights and several squires dead, the dark knight's fortress is effectively debarbed.")
     print("You head back to the inn to get your reward.")
     player.xp += quest.xp_reward
     player.coins += quest.coins_reward
