@@ -13,19 +13,19 @@ class Quest:
         self.other_reward = other_reward
 
 def quest_function_goblin_encampment(player, quest: Quest):
-    """The Player is tasked with defeating a goblin warrior at a local goblin encampment that is troubling Scrimshaw."""
+    """The Player is tasked with defeating a goblin captain at a local goblin encampment that is troubling Scrimshaw."""
     print("You wander into the nearby woods searching for the goblin encampment when you were suddenly attacked by a goblin.")
     combat.monster_encounter(player, character.goblin)
 
     print("The goblin had a note detailing orders on her. The handwriting is awful, but you figure you need to follow the river and so go that way.")
     print("You see the encampment but are attacked by two goblins.")
-    combat.monster_encounter(player, character.goblin)
-    combat.monster_encounter(player, character.goblin)
-
-    print("Those two goblins were the warrior's personal guard. They were branded with a goblin's hand upon their face. A shriek echoes in the encampment as a well armed goblin, the warrior, challenges you.")
+    combat.monster_encounter(player, character.goblin_warrior)
     combat.monster_encounter(player, character.goblin_warrior)
 
-    print("The warrior is dead, and your job is done, but if you want you can loot the rest of encampment, killing the rest of the goblins and gaining some gold.")
+    print("Those two goblins were the captain's personal guard. They were branded with a goblin's hand upon their face. A shriek echoes in the encampment as a well armed goblin, the captain, challenges you.")
+    combat.monster_encounter(player, character.goblin_captain)
+
+    print("The captain is dead, and your job is done, but if you want you can loot the rest of encampment, killing the rest of the goblins and gaining some gold.")
     while True:
         choice = input(f"Would you like to fight some more goblins and get some more loot? [y/n]?\n")
         if choice == 'y':
@@ -35,7 +35,7 @@ def quest_function_goblin_encampment(player, quest: Quest):
             print("The goblin was no match for you. You now move onto looking through the barracks. The barracks have two quivering goblins who reluctantly start fighting.")
             combat.monster_encounter(player, character.goblin)
             combat.monster_encounter(player, character.goblin)
-            print("You don't find much of value in the barracks. The only building is the assumed office for the warrior. Inside, two wolves wake up as you enter.")
+            print("You don't find much of value in the barracks. The only building is the assumed office for the captain. Inside, two wolves wake up as you enter.")
             combat.monster_encounter(player, character.wolf)
             combat.monster_encounter(player, character.wolf)
             print("You find 50 gold worth of trinkets throughout the office.")
@@ -55,7 +55,19 @@ def quest_function_goblin_encampment(player, quest: Quest):
 
 def quest_function_forest_cleanup(player, quest: Quest):
     """The local forest has an overpopulation of wolves, which the player is tasked with culling."""
-    print("Even from far away, the forest is obviously overrun with wolves. You can't see too many deer ")
+    print("Even from far away, the forest is obviously overrun with wolves. You can't see too many deer around. Two wolves spot you and engage.")
+    combat.monster_encounter(player, character.wolf)
+    combat.monster_encounter(player, character.wolf)
+
+    print("After the fight, you can hear howling start to pick up, including a deep howl that you feel in your chest. At this point, three wolves circle you and attack.")
+    combat.monster_encounter(player, character.wolf)
+    combat.monster_encounter(player, character.wolf)
+    combat.monster_encounter(player, character.wolf)
+
+    print("The howling starts to subside but the deeper howling grows and grows until you see a massive wolf, with deep red eyes. It lunged at your immediately.")
+    combat.monster_encounter(player, character.wolf_dire)
+
+    print("You defeated the dire wolf, and all howling subsides. Seems like the town is saved.")
 
     print("You head back to the inn to get your reward.")
     player.xp += quest.xp_reward
