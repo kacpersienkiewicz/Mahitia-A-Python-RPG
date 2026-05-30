@@ -1,18 +1,92 @@
 import weapons
 import apparel
+import quest
 
 def enter_the_inn(player) -> None:
     """Player enters the inn to rest."""
     while True:
-        choice = input("You enter the Ivory Inn. The innkeeper, Jane, greets you. Would you like to grab a room to rest (10 coins)?[y/n]\n")
+        choice = input("You enter the Ivory Inn. The innkeeper, Jane, greets you. What would you like to do?\n\t1. Rest at the inn (10 coins)\n\t2. Speak with the Innkeeper\n\t3. Leave the Inn\n")
+        if choice == '1':
+            while True:
+                choice = input("Resting at the inn costs 10 coins. Would you like to rest at the inn? [y/n]?\n")
+                if choice == 'y':
+                    rest_inn(player)
+                    break
+                elif choice == 'n':
+                    print("You decide to not rent a bed at the inn.")
+                    break
+                else:
+                    print("Only 'y' or 'n' are valid inputs. Please type one of those.")
+            break
+        if choice == '2':
+            while True:
+                choice = input("What do you want to ask Jane about?\n\t1. How long has she owned the inn?\n\t2. Anything happening around town?\n\t3. Leave the inn\n")
+                if choice == '1':
+                    print("I've owned this inn since five years ago, when I inherited it from my mother who established the place 30 years ago.\n")
+                elif choice == '2':
+                    response = "Scrimshaw has been busy lately, though not for the best reasons."
+                    call_to_action = "Would you like to ask about any of these threads?"
+                    if quest.quest_goblin_encampment.completed == False:
+                        response += " A local goblin encampment is terrorizing the locals."
+                        call_to_action += "\n\t1. Ask about the goblin encampment."
+                    if quest.quest_forest_cleanup.completed == False:
+                        response += " Wolves are attacking hunters are farmers alike."
+                        call_to_action += "\n\t2. Ask about the wolves."
+                    if quest.quest_bandit_lord_showdown == False and player.level >= 5:
+                        response += " A bandit lord is challenging everyone in town."
+                        call_to_action += "\n\t3. Ask about the bandit lord."
+                    if quest.quest_dark_knights_fortress == False and player.level >= 10:
+                        response += " A farmer found a massive castle belonging to Dark Knights."
+                        call_to_action += "\n\t4. Ask about the Dark Knight's Fortress."
+                    
+                    call_to_action += "\n\t5. Leave the inn."
+
+                    while True:
+                        print(response)
+                        choice = input(call_to_action)
+                        if choice == '1':
+                            quest_prompt = "There's a small group of goblins led by a better armed warrior. The town has raised a fund of 50 coins to get rid of them."
+                            accept_reject_quest(player, quest_prompt, quest.quest_goblin_encampment)
+                            break
+                        if choice == '2':
+                            quest_prompt = "Wolves have been harrassing hunters and farmers which is harming our livelihoods. There are rumors of a dire wolf among them. The town has raised a fund of 50 coins to get rid of the dire wolf."
+                            accept_reject_quest(player, quest_prompt, quest.quest_forest_cleanup)
+                            break
+                        if choice == '3':
+                            quest_prompt = "An obnoxious bandit lord has been boasting and insulting everyone. We are sick of him, and raised 100 coins to get rid of him."
+                            accept_reject_quest(player, quest_prompt, quest.quest_bandit_lord_showdown)
+                            break
+                        if choice == '4':
+                            quest_prompt = "Fred mentioned that he was picking mushrooms and found a castle made of blackened rock off in the forest. We're not happy about the revelation and raised 150 coins to get rid of it."
+                            accept_reject_quest(player, quest_prompt, quest.quest_dark_knights_fortress)
+                            break
+                        if choice == '5':
+                            break
+                        else:
+                            print(f"{choice} is not a valid choice. Please type in 1, 2, 3, 4 or 5.")
+                    break
+                elif choice == '3':
+                    break
+                else:
+                    print(f"{choice} is not a valid choice. Please type in 1, 2, or 3.")
+            break
+        if choice == '3':
+            break
+
+def accept_reject_quest(player, quest_prompt: str, quest: quest.Quest) -> None:
+    """Allows the player to reject or accept a quest."""
+    while True:
+        print(quest_prompt)
+        choice = input("Do you accept this quest? [y/n]?\nNote that you will immediately undertake the quest, so prepare beforehand.\n")
         if choice == 'y':
-            rest_inn(player)
+            quest.quest_function(player)
             break
         elif choice == 'n':
-            print("You decide to not rent a bed at the inn.")
-            continue
+            break
         else:
-            print("Only 'y' or 'n' are valid inputs. Please type one of those.")
+            print("Only 'y' or 'n' are valid inputs. Please enter one of those.")
+            continue
+
 
 def rest_inn(player) -> None:
     """Simply allows the player to restore health and stamina"""

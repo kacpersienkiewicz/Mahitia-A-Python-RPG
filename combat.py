@@ -3,6 +3,13 @@ from town import inventory_management
 import character
 import random as rand
 
+def defeat_logic(player) -> None:
+    if player.health <= 0:
+        print(f"You have lost. You were level {player.level}, and had  {player.xp} experience and {player.coins} coins at death.")
+        quit()
+    else:
+        print("You actually didn't lose. Probably shouldn't be here.")
+
 def choose_random_monster(player) -> character.Character:
     if player.level < 5:
         monster_list = rand.choice(character.monster_roster[:1])
@@ -15,7 +22,7 @@ def choose_random_monster(player) -> character.Character:
         enemy = rand.choice(monster_list)
     return enemy
 
-def random_monster_encounter(player, enemy) -> bool:
+def monster_encounter(player, enemy) -> bool:
     enemy.look_at_character()
     enemy.health = enemy.max_health
     print("You enter combat with them.")
@@ -36,13 +43,12 @@ def random_monster_encounter(player, enemy) -> bool:
 
     if player.health <= 0:
         print("You have been defeated.")
-        won_battle = False
+        defeat_logic(player)
+
     else:
         print("You are victorious!")
         enemy.defeat_and_loot_character(player)
-        won_battle = True
 
-    return won_battle
 
 def player_combat_action(player, enemy) -> None:
     """Defines what the player can do during combat"""

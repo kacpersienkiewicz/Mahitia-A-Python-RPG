@@ -25,11 +25,10 @@ def main():
 
         if choice == '1':
             enemy = combat.choose_random_monster(Hero)
-            won_battle = combat.random_monster_encounter(Hero, enemy)
-            if won_battle == False:
+            combat.monster_encounter(Hero, enemy)
+            if Hero.health <= 0:
+                combat.defeat_logic(Hero)
                 break
-            else:
-                continue
         elif choice == '2':
             town.enter_the_inn(Hero)
         elif choice == '3':
@@ -42,7 +41,6 @@ def main():
             print(f"{choice} is not a valid choice. Please type in 1, 2, 3 or 4.")
             continue
     
-    print(f"You have lost. You were level {Hero.level}, and had {Hero.coins} coins at death.")
 
 if __name__ == "__main__":
     main()
