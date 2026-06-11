@@ -1,5 +1,5 @@
 # Mahitia A Python RPG
-You start in a small hunting and farming town of Scrimshaw, trying to make your way in the world.
+You start in a small hunting and farming town of Scrimshaw, trying to make your way in the world. The max level is 10 and there is an intended final quest, but you can still play afterwards.
 
 ## Technical
 * I created a class for equipment (weapon, apparel), quests, and characters (including a subclass for players).
