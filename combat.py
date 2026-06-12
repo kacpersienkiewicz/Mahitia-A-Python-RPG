@@ -4,6 +4,7 @@ import character
 import random as rand
 
 def defeat_logic(player) -> None:
+    """Handles a player dropping to 0 health."""
     if player.health <= 0:
         print(f"You have lost. You were level {player.level}, and had  {player.xp} experience and {player.coins} coins at death.")
         quit()
@@ -11,6 +12,7 @@ def defeat_logic(player) -> None:
         print("You actually didn't lose. Probably shouldn't be here.")
 
 def choose_random_monster(player) -> character.Character:
+    """Choose a random encounter, based on the player's level, from a list of lists of Character objects"""
     if player.level < 5:
         monster_list = rand.choice(character.monster_roster[:1])
         enemy = rand.choice(monster_list)
@@ -22,7 +24,15 @@ def choose_random_monster(player) -> character.Character:
         enemy = rand.choice(monster_list)
     return enemy
 
-def monster_encounter(player, enemy) -> bool:
+def monster_encounter(player, enemy):
+    """
+    Simulates a battle between the player and an enemy.
+
+    Args:
+        player (Character class): the player character
+        enemy (Character class): the player's opponent
+
+    """
     enemy.look_at_character()
     enemy.health = enemy.max_health
     print("You enter combat with them.")
@@ -51,7 +61,14 @@ def monster_encounter(player, enemy) -> bool:
 
 
 def player_combat_action(player, enemy) -> None:
-    """Defines what the player can do during combat"""
+    """
+    Defines what the player can do during combat
+
+    Args:
+        player (Character class): the player character
+        enemy (Character class): the player's opponent
+    """
+
     while True:
         choice = input(f"What would you like to do?\n\t1. Standard Attack\n\t2. Double Strike (Costs 25 Stamina)\n\t3. Armor Piercing Strike (Costs {25 + 5 * enemy.armor} Stamina)\n\t4. Inventory Management\n\t5. Character Status\n")
         if choice == '1':
@@ -91,7 +108,12 @@ def enemy_combat_action(player, enemy) -> None:
     Reckless Double Strike: Uses Double Strike as possible
     Armor Aware: Uses Armor Piercing Strike if the player's armor blocks half or more of their damage and they are at max stamina.
     Complex: Willing to use all of their stamina. Uses Armor Piercing Strike if armor blocks half or more damage, otherwise uses Double Strike.
+
+    Args:
+        player (Character class): the player character
+        enemy (Character class): the player's opponent
     """
+    
     if enemy.combat_strategy == "Simple":
         enemy.weapon.attack(enemy, player)
     elif enemy.combat_strategy == "Cautious Double Strike":

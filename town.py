@@ -74,7 +74,14 @@ def enter_the_inn(player) -> None:
             break
 
 def accept_reject_quest(player, quest_prompt: str, quest: quest.Quest) -> None:
-    """Allows the player to reject or accept a quest."""
+    """
+    Allows the player to reject or accept a quest.
+    
+    Args:
+        player (Character class): the player character
+        quest_prompt (string): the quest prompt that describes the quest to the player
+        quest (Quest class): the Quest object that holds the data for the ques
+    """
     while True:
         print(quest_prompt)
         choice = input("Do you accept this quest? [y/n]?\nNote that you will immediately undertake the quest, so prepare beforehand.\n")
@@ -143,7 +150,13 @@ def inventory_management(player) -> None:
             continue
 
 def equip_item(player, item) -> None:
-    """Equip an equippable item."""
+    """
+    Equip an equippable item.
+    
+    Args:
+        player (Player class): the player character
+        item (Weapon or Apparel class): item to be equipped
+    """
     if isinstance(item, weapons.Weapon):
         player.equip_weapon(item)
     elif isinstance(item, apparel.Apparel):
@@ -166,7 +179,13 @@ def present_store_stock(stock) -> None:
         print(f"{type(stock[0])} is an invalid type for presenting store stock.")
 
 def store_logic(player, stock) -> None:
-    """Takes in a store's stock, the player's info and figures out the logic for the store so the player can buy stuff."""
+    """
+    Takes in a store's stock, the player's info and figures out the logic for the store so the player can buy stuff.
+    
+    Args:
+        player (Player class): the player character
+        stock (list of objects like weapons or apparel): items that ta store sells  
+    """
     while True:
         present_store_stock(stock)
         choice = input(f"Please enter the Index value of the item you want to buy. Enter '-1' to leave the market.\n")
