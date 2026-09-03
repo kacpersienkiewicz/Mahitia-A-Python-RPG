@@ -7,7 +7,7 @@ You start in a small hunting and farming town of Scrimshaw, trying to make your 
 * Four quests: 2 intro level, 1 medium level and 1 hard quest.
 * Three monster lists: weak, moderate and hard. This also includes the same tiers for each attribute to create new enemies fairly easily.
 * Created a function to simplify the code for shopping.
-  * Basically, it checks what instance an item is (weapon or apparel, for example) and then formats a table based off of that.
+  * It checks what instance an item is (weapon or apparel, for example) and then formats a table based off of that.
 
 ## TODO
 * Add Classes to expand progression like spells, abilities and so on.
